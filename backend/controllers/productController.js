@@ -2,6 +2,7 @@
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
+const ApiFeature = require("../utils/apiFeatures");
 
 //create Product -> This is Admin Route [ki sirf admin hi add kr ske]
 exports.createProduct = catchAsyncError(async (req, res, next) => {
@@ -15,7 +16,8 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 //GET ALL PRODUCT
 exports.getAllProduct = catchAsyncError(async (req, res) => {
   //1st function -> it is a callback function
-  const products = await Product.find();
+  const apiFeatures = new ApiFeature(Product.find(), req.query).search(); //idr .find() use kra to niche nhi kr skte
+  const products = await apiFeatures.query;
   // res.status(200).json({ message: "route is working fine" }); //1st
   res.status(200).json({
     success: true,
