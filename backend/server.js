@@ -10,7 +10,6 @@ dotenv.config({ path: "backend/config/config.env" }); //->  after giving the  pa
 //connecting to database after config
 connectDatabase();
 
-
 //create server
 app.listen(process.env.PORT, () => {
     console.log(`server is listening on this http://localhost:${process.env.PORT}`);
